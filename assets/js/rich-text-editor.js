@@ -1,6 +1,6 @@
 'use strict';
 (function($) {
-    
+
     $(document).ready( function() {
         /**
          * Initialize Quill Editor
@@ -50,7 +50,7 @@
             };
 
             tooltip.edit('image');
-            tooltip.textbox.placeholder = 'Enter media URL';
+            tooltip.textbox.placeholder = OLRichTextComments.enterMediaUrl;
         }
 
         /**
@@ -73,13 +73,13 @@
          * Add aria-hidden on the SVG icons in the buttons;
          * Add role and aria-multiline attribute to the editor textarea;
          */
-        $('button.ql-bold').attr( 'aria-label', 'Toggle bold text' );
-        $('button.ql-italic').attr( 'aria-label', 'Toggle italic text' );
-        $('button.ql-underline').attr( 'aria-label', 'Toggle underline text' );
-        $('button.ql-link').attr( 'aria-label', 'Toggle link modal' );
-        $('button.ql-list[value="ordered"]').attr('aria-label', 'Toggle ordered list');
-        $('button.ql-list[value="bullet"]').attr('aria-label', 'Toggle bulleted list');
-        $('button.ql-image').attr( 'aria-label', 'Toggle multimedia modal' );
+        $('button.ql-bold').attr( 'aria-label', OLRichTextComments.toggleBoldText );
+        $('button.ql-italic').attr( 'aria-label', OLRichTextComments.toggleItalicText );
+        $('button.ql-underline').attr( 'aria-label', OLRichTextComments.toggleUnderlineText );
+        $('button.ql-link').attr( 'aria-label', OLRichTextComments.toggleLinkModal );
+        $('button.ql-list[value="ordered"]').attr('aria-label', OLRichTextComments.toggleOrderedList );
+        $('button.ql-list[value="bullet"]').attr('aria-label', OLRichTextComments.toggleBulletedList );
+        $('button.ql-image').attr( 'aria-label', OLRichTextComments.toggleMultimediaModal );
         $('.ql-formats button').attr('aria-pressed', false );
         $('.ql-formats button > svg').attr('aria-hidden', true );
         $('#ol-rich-editor .ql-editor').attr( {
@@ -92,7 +92,7 @@
          */
         let insertMediaField = $('.ql-tooltip input[data-video="Embed URL"]');
         insertMediaField.attr('id', 'quill-media');
-        $('<label for="quill-media" class="sr-only">Enter media url</label>').insertBefore(insertMediaField);
+        $('<label for="quill-media" class="sr-only">' + OLRichTextComments.enterMediaUrl + '</label>').insertBefore(insertMediaField);
 
         /**
          * Remove ql-preview
@@ -112,14 +112,14 @@
          */
         $(document).on( 'click', 'form#commentform input#submit', function(e) {
             $('#response-notice').remove();
-            
+
             let commentElement = $('textarea#comment');
             let isRequired = ( typeof commentElement.attr('required') != 'undefined' && commentElement.attr('required') !== false ) ? true : false;
             let commentText = commentElement.val();
 
             if( ! commentText && isRequired ) {
                 e.preventDefault();
-                $('form#commentform').append('<div id="response-notice"><p>The comment field is required.</p></div>');
+                $('form#commentform').append('<div id="response-notice"><p>' + OLRichTextComments.commentFieldIsRequired + '</p></div>');
                 return;
             }
         });

@@ -30,45 +30,60 @@ add_action( 'init', __NAMESPACE__ . '\\load_textdomain' );
  * @return void
  */
 function register_assets() {
-	if( is_single() || is_page() ) {
-		wp_register_style(
-			'quill-style',
-			plugins_url( 'assets/css/quill.snow.css' , __FILE__ ),
-			[],
-			'1.3.6'
-		);
+	wp_register_style(
+		'quill-style',
+		plugins_url( 'assets/css/quill.snow.css' , __FILE__ ),
+		[],
+		'1.3.6'
+	);
 
-		wp_register_script(
-			'quill-script',
-			plugins_url( 'assets/js/quill.min.js', __FILE__ ),
-			[ 'jquery' ],
-			'1.3.6',
-			true
-		);
+	wp_register_script(
+		'quill-script',
+		plugins_url( 'assets/js/quill.min.js', __FILE__ ),
+		[ 'jquery' ],
+		'1.3.6',
+		true
+	);
 
-		wp_register_script(
-			'ol-rich-text-comments',
-			plugins_url( 'assets/js/rich-text-editor.js', __FILE__ ),
-			[ 'quill-script' ],
-			VERSION,
-			true
-		);
+	wp_register_script(
+		'ol-rich-text-comments',
+		plugins_url( 'assets/js/rich-text-editor.js', __FILE__ ),
+		[ 'quill-script' ],
+		VERSION,
+		true
+	);
 
-		wp_enqueue_style( 'quill-style' );
-		wp_enqueue_script( 'ol-rich-text-comments' );
-	}
+	wp_localize_script(
+		'ol-rich-text-comments',
+		'OLRichTextComments',
+		[
+			'commentFieldIsRequired' => __( 'The comment field is required.', 'openlab-rich-text-comments' ),
+			'embedUrl'               => __( 'Embed URL', 'openlab-rich-text-comments' ),
+			'enterMediaUrl'          => __( 'Enter media URL', 'openlab-rich-text-comments' ),
+			'toggleBoldText'         => __( 'Toggle bold text', 'openlab-rich-text-comments' ),
+			'toggleBulletedList'     => __( 'Toggle bulleted list', 'openlab-rich-text-comments' ),
+			'toggleItalicText'       => __( 'Toggle italic text', 'openlab-rich-text-comments' ),
+			'toggleLinkModal'        => __( 'Toggle link modal', 'openlab-rich-text-comments' ),
+			'toggleMultimediaModal'  => __( 'Toggle multimedia modal', 'openlab-rich-text-comments' ),
+			'toggleOrderedList'      => __( 'Toggle ordered list', 'openlab-rich-text-comments' ),
+			'toggleUnderlineText'    => __( 'Toggle underline text', 'openlab-rich-text-comments' ),
+		]
+	);
 }
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\register_assets' );
 
 /**
  * Modify the HTML of the comment field to include the div element
  * needed for the Quill editor.
- * 
+ *
  * @param  array $args
  * @return array $args
  */
 function rich_text_comment_form( $args ) {
 	$args['comment_field'] = str_replace( '<textarea', '<div id="ol-rich-editor" style="height: 150px;"></div><textarea style="display:none;"', $args['comment_field'] );
+
+	wp_enqueue_style( 'quill-style' );
+	wp_enqueue_script( 'ol-rich-text-comments' );
 
 	return $args;
 }
