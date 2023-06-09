@@ -37,9 +37,21 @@
             tooltip.save = function() {
                 const range = quillEditor.getSelection(true);
                 const value = tooltip.textbox.value;
-                if (value) {
-                    quillEditor.insertText(range.index, value, true);
+
+                // If there is a selected text, remove the selection before inserting the image
+                if( range ) {
+                    if( range.length > 0 ) {
+                        quillEditor.deleteText(range.index, range.length, 'api' );
+                    }
                 }
+
+                // Insert image
+                if (value) {
+                    quillEditor.insertEmbed(range.index, 'image', value, true, 'api' );
+                }
+
+                // Remove old value from the tooltip input
+                tooltip.textbox.value = '';
             };
 
             // Called on hide and save.
