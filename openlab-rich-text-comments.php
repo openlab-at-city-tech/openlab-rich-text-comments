@@ -115,6 +115,12 @@ function kses_filter_comment( $content ) {
 		'ol'		=> array(),
 		'ul'		=> array(),
 		'li'		=> array(),
+		'img'		=> array(
+			'src'		=> array(),
+			'alt'		=> array(),
+			'width'		=> array(),
+			'height'	=> array()
+		)
 	);
 
 	return wp_kses( $content, $allowedTags );
