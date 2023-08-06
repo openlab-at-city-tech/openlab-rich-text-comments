@@ -37,6 +37,8 @@
             tooltip.save = function() {
                 const range = quillEditor.getSelection(true);
                 const value = tooltip.textbox.value;
+                const isImageUrl = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(value);
+
 
                 // If there is a selected text, remove the selection before inserting the image
                 if( range ) {
@@ -47,7 +49,11 @@
 
                 // Insert image
                 if (value) {
+                  if ( isImageUrl ) {
                     quillEditor.insertEmbed(range.index, 'image', value, true, 'api' );
+                  } else {
+                    quillEditor.insertText( range.index, value );
+                  }
                 }
 
                 // Remove old value from the tooltip input
