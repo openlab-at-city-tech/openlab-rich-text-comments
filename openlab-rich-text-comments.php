@@ -37,6 +37,13 @@ function register_assets() {
 		'1.3.6'
 	);
 
+	wp_register_style(
+		'ol-rich-text-comments',
+		plugins_url( 'assets/css/rich-text-editor.css' , __FILE__ ),
+		[ 'quill-style' ],
+		VERSION
+	);
+
 	wp_register_script(
 		'quill-script',
 		plugins_url( 'assets/js/quill.min.js', __FILE__ ),
@@ -59,6 +66,7 @@ function register_assets() {
 		[
 			'commentFieldIsRequired' => __( 'The comment field is required.', 'openlab-rich-text-comments' ),
 			'embedUrl'               => __( 'Embed URL', 'openlab-rich-text-comments' ),
+			'enterAltText'           => __( 'Enter alt text', 'openlab-rich-text-comments' ),
 			'enterMediaUrl'          => __( 'Enter media URL', 'openlab-rich-text-comments' ),
 			'toggleBoldText'         => __( 'Toggle bold text', 'openlab-rich-text-comments' ),
 			'toggleBulletedList'     => __( 'Toggle bulleted list', 'openlab-rich-text-comments' ),
@@ -82,7 +90,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\register_assets' );
 function rich_text_comment_form( $args ) {
 	$args['comment_field'] = str_replace( '<textarea', '<div id="ol-rich-editor" style="height: 150px;"></div><textarea style="display:none;"', $args['comment_field'] );
 
-	wp_enqueue_style( 'quill-style' );
+	wp_enqueue_style( 'ol-rich-text-comments' );
 	wp_enqueue_script( 'ol-rich-text-comments' );
 
 	return $args;
