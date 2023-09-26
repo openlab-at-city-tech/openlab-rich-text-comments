@@ -66,7 +66,7 @@ function register_assets() {
 		[
 			'commentFieldIsRequired' => __( 'The comment field is required.', 'openlab-rich-text-comments' ),
 			'embedUrl'               => __( 'Embed URL', 'openlab-rich-text-comments' ),
-			'enterAltText'           => __( 'Enter alt text', 'openlab-rich-text-comments' ),
+			'enterAltText'           => __( 'Alt text description', 'openlab-rich-text-comments' ),
 			'enterMediaUrl'          => __( 'Enter media URL', 'openlab-rich-text-comments' ),
 			'toggleBoldText'         => __( 'Toggle bold text', 'openlab-rich-text-comments' ),
 			'toggleBulletedList'     => __( 'Toggle bulleted list', 'openlab-rich-text-comments' ),
