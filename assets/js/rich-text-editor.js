@@ -43,7 +43,41 @@
 									altInputLabel.textContent = OLRichTextComments.enterAltText;
 									altInputLabel.setAttribute( 'for', 'quill-alt' );
 
-									document.getElementById( 'quill-media' ).insertAdjacentElement( 'afterend', altInput ).insertAdjacentElement( 'afterend', altInputLabel );
+									var altContainerDiv = document.createElement( 'div' );
+									altContainerDiv.className = 'ql-image-tooltip-section';
+									altContainerDiv.id = 'quill-alt-container';
+									altContainerDiv.appendChild( altInput );
+									altContainerDiv.appendChild( altInputLabel );
+
+									document.getElementById( 'quill-media' ).insertAdjacentElement( 'afterend', altContainerDiv );
+								}
+
+								if ( tooltip ) {
+									var altContainerDiv = document.getElementById( 'quill-alt-container' );
+
+									// Put the #quill-media input and its label in a container div.
+									var mediaInput = tooltip.querySelector( '#quill-media' );
+									if ( mediaInput ) {
+										var mediaContainerDiv = document.createElement( 'div' );
+										var mediaInputLabel = tooltip.querySelector( 'label[for="quill-media"]' );
+
+										mediaContainerDiv.className = 'ql-image-tooltip-section';
+										mediaContainerDiv.appendChild( mediaInput );
+										mediaContainerDiv.appendChild( mediaInputLabel );
+
+										// Insert before the .quill-alt-container div.
+										if ( altContainerDiv ) {
+											altContainerDiv.insertAdjacentElement( 'beforebegin', mediaContainerDiv );
+										}
+									}
+
+									// Take th .ql-action element and put it into the quill-alt-container div.
+									var actionButton = tooltip.querySelector( '.ql-action' );
+									if ( actionButton ) {
+										if ( altContainerDiv ) {
+											altContainerDiv.appendChild( actionButton );
+										}
+									}
 								}
 							}, 0);
 						});

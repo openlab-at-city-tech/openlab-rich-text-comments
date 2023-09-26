@@ -1,3 +1,18 @@
+.ql-snow .ql-tooltip.ql-image-tooltip {
+	min-width: 300px;
+}
+
 .ql-snow .ql-tooltip.ql-image-tooltip input[type="text"] {
 	margin-right: 5px;
+}
+
+.ql-image-tooltip-section {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.ql-snow .ql-tooltip .ql-image-tooltip-section input[type="text"] {
+	flex: 1;
+	max-width: none;
+	width: auto;
 }
