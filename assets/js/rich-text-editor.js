@@ -82,6 +82,23 @@
 							}, 0);
 						});
 					}
+
+					var linkButton = toolbar.container.querySelector('button.ql-link');
+					if (linkButton) {
+						linkButton.addEventListener('click', () => {
+							setTimeout(() => {
+								var tooltip = document.querySelector( '.ql-editing' );
+								var linkInput = tooltip.querySelector( '#quill-media' );
+								var inputValue = linkInput.value;
+
+								var inputValueIsUrl = /^(https?:\/\/|www\.)/.test( inputValue );
+								if ( ! inputValueIsUrl ) {
+									linkInput.value = ''
+								}
+							}, 0);
+						})
+					}
+
 				}
 			}
 
