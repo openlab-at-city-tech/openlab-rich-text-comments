@@ -80,6 +80,19 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\register_assets' );
  * @return array $args
  */
 function rich_text_comment_form( $args ) {
+	static $used_id = false;
+
+	/*
+	 * Only allow the ID to be applied once. This is important for adherence to
+	 * HTML standards, and also avoids conflicts with plugins that may load
+	 * duplicate instances of the comment form, such as Inline Comments.
+	 */
+	if ( $used_id ) {
+		return $args;
+	}
+
+	$used_id = true;
+
 	$args['comment_field'] = str_replace( '<textarea', '<div id="ol-rich-editor" style="height: 150px;"></div><textarea style="display:none;"', $args['comment_field'] );
 
 	wp_enqueue_style( 'quill-style' );
