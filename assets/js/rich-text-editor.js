@@ -136,9 +136,9 @@ $(document).ready( function() {
 	  let commentText = commentElement.val();
 
 	  if( ! commentText && isRequired ) {
-	  e.preventDefault();
-	  $('form#commentform').append('<div id="response-notice"><p>' + OLRichTextComments.commentFieldIsRequired + '</p></div>');
-	  return;
+		e.preventDefault();
+		$('form#commentform').append('<div id="response-notice"><p>' + OLRichTextComments.commentFieldIsRequired + '</p></div>');
+		return;
 	  }
   });
 } );
