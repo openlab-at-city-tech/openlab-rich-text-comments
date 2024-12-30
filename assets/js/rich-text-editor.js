@@ -112,12 +112,22 @@
 			 */
 			var quillEditor = new Quill('#ol-rich-editor', {
 					modules: {
-							toolbar: {
-									container: [ 'bold', 'italic', 'underline', 'link', 'image', { 'list': 'ordered'}, { 'list': 'bullet' } ],
-									handlers: {
-											image: imageHandler
+						keyboard: {
+							bindings: {
+								tab: {
+									key: 9,
+									handler: function(range, context) {
+										return true;
 									}
+								}
 							}
+						},
+						toolbar: {
+								container: [ 'bold', 'italic', 'underline', 'link', 'image', { 'list': 'ordered'}, { 'list': 'bullet' } ],
+								handlers: {
+										image: imageHandler
+								}
+						}
 					},
 					theme: 'snow'
 			});
