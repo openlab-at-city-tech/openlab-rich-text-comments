@@ -65,6 +65,7 @@ function register_assets() {
 		'OLRichTextComments',
 		[
 			'commentFieldIsRequired' => __( 'The comment field is required.', 'openlab-rich-text-comments' ),
+			'commentFieldLabel'      => __( 'Comment', 'openlab-rich-text-comments' ),
 			'embedUrl'               => __( 'Embed URL', 'openlab-rich-text-comments' ),
 			'enterAltText'           => __( 'Alt text description', 'openlab-rich-text-comments' ),
 			'enterMediaUrl'          => __( 'Enter media URL', 'openlab-rich-text-comments' ),

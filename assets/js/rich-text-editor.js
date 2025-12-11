@@ -233,7 +233,8 @@
 			$('.ql-formats button > svg').attr('aria-hidden', true );
 			$('#ol-rich-editor .ql-editor').attr( {
 					'role': 'textbox',
-					'aria-multiline': true
+					'aria-multiline': true,
+					'aria-label': OLRichTextComments.commentFieldLabel
 			} );
 
 			/**
